@@ -84,15 +84,35 @@ class LinkedList{
 			cur = root;
 			while(cur != NULL) {
 				if(cur->val == data) {
-					cout << "Item "<< data <<" found at " << counter << "th position in the list" << endl;
+					cout << data <<" found at " << counter << "th position in the list" << endl;
 					return;
 				}
 				counter++;
 				cur = cur->next;
 			}
-			cout << "Item " << data << " not present in the list" << endl;
+			cout << data << " not present in the list" << endl;
 		}
 	}
+
+	// Function to display the kth element of the list
+	void getKth(int k) {
+		node* cur = new node();
+
+		int counter = 0;
+
+		cur = root;
+
+		while(cur != NULL) {
+			if(counter == k) {
+				cout << "The " << k << "th element is " << cur->val << endl;
+				return;
+			}
+			cur = cur->next;
+			counter++;
+		}
+		cout << "The value of k " << k << " is bigger than the size of the list" << endl;
+	}
+
 
 	// Function to display kth element from the back of the linked list
 	void getKthFromBack(int k) {
@@ -104,6 +124,11 @@ class LinkedList{
 
 		int cntr = 0;
 
+		if (k < 0) {
+			cout << "K is not a valid number" << endl;
+			return;
+		}
+
 		while(first != NULL) {
 			first = first->next;
 			if (cntr > k) {
@@ -111,7 +136,12 @@ class LinkedList{
 			}
 			cntr++;
 		}
-		cout << "The " << k << "th element is " << second->val << endl;
+		if(k > cntr) {
+			cout << "The value of k " << k << " is bigger than the size of the list, " << cntr << endl;
+		}
+		else {
+			cout << "The " << k << "th element from the back is " << second->val << endl;
+		}
 	}
 
 };
@@ -128,8 +158,12 @@ int main(){
 	list1.printList();
 	list1.searchList(0);
 	list1.searchList(4);
-	list1.getKthFromBack(3);
+	list1.getKthFromBack(30);
 	list1.getKthFromBack(2);
 	list1.getKthFromBack(1);
-	list1.getKthFromBack(0);
+	list1.getKthFromBack(-1);
+	list1.getKth(0);
+	list1.getKth(1);
+	list1.getKth(2);
+	list1.getKth(33);
 }
