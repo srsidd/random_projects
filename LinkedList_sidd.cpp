@@ -144,6 +144,62 @@ class LinkedList{
 		}
 	}
 
+	// Function to count the number of times a given int occurs in a LinkedList
+	void count(int k) {
+		node* cur = new node();
+
+		cur = root;
+
+		int counter = 0;
+
+		while(cur != NULL) {
+			if(cur->val == k) {
+				counter++;
+			}
+			cur = cur->next;
+		}
+		cout << "The frequency of " << k << " in the list is " << counter << endl;
+
+	}
+
+	// Function to delete the list
+	void deleteList() {
+		node* cur = new node();
+		while(cur != NULL) {
+			delete cur;
+			cur = cur->next; 
+		}
+		root = NULL;
+	}
+
+	// Function to insert node at the nth position in the list
+	void insertAtN(int n,int data) {
+		node* cur = new node();
+		int counter = 0;
+
+		cur = root;
+
+		while(cur != NULL) {
+			if(counter == n-1) {
+				node* temp = new node();
+				temp->val = data;
+				temp->next = cur->next;
+				cur->next = temp;
+				return;
+			}
+			if(cur->next == NULL) {
+				cout << "The value of " << n << " is greater than the size of the list" << endl;
+				node* temp = new node();
+				temp->val = data;
+				cur->next = temp;
+				temp->next = NULL;
+				return;
+			}
+			cur = cur->next;
+			counter++;
+		}
+	}
+
 };
 
 int main(){
@@ -166,4 +222,16 @@ int main(){
 	list1.getKth(1);
 	list1.getKth(2);
 	list1.getKth(33);
+	list1.insertBack(-1);
+	list1.insertBack(-1);
+	list1.insertBack(-1);
+	list1.insertFront(-1);
+	list1.insertFront(-1);
+	list1.insertFront(-1);
+	list1.insertFront(-1);
+	list1.printList();
+	list1.count(100);
+	list1.count(-1);
+	list1.insertAtN(4, 100);
+	list1.printList();
 }
