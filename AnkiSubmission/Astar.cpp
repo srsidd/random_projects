@@ -529,6 +529,7 @@ class Grid {
 				}
 			}
 			disp.logData(" No path could be found ");
+			exit(0);
 		}
 
 		/*

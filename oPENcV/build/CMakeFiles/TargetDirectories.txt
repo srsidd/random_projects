@@ -1,0 +1,2 @@
+/home/siddharth/workspace/C++/oPENcV/build/CMakeFiles/demo.dir
+/home/siddharth/workspace/C++/oPENcV/build/CMakeFiles/face3.dir
