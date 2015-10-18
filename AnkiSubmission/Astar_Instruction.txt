@@ -9,10 +9,3 @@ The program then displays a grid with the graph, obstacles and path to be taken 
 
 The size of the grid cannot be changed by the user during run time and has to be done in the code. This is set by the "gridSize" macro defined on Line 16.
 
-
-31, dobbler green, 
-dieselstrasse,
-gerlingen
-
-Happy Birthday!
-Better late than never, no? Be a little crazy, and do something, anything. Always be on yer toes. Remember "When was the last time you did something for the first time". Make that backpacking trip. Love, Sidd.
