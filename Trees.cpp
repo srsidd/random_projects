@@ -56,27 +56,11 @@ public:
 	}
 };
 
-string stringRev(string s){
-	string rev;
-	for(int i = s.length()-1; i > -1; i--) {
-		rev = rev + s[i];
-	}
-	return rev;
-}
 
 int main(){
 	cout << "Hello Sidd" << endl;
-	// Tree tree1;
-	// tree1.insert(55);
-	// tree1.insert(54);
-	// tree1.insert(53);
-	string s = "Hiih";
-	string rev = stringRev(s);
-	cout << s << "  " << rev << endl;
-	if(!s.compare(rev)){
-		cout << "Tis an anagram" << endl;
-	}
-	else {
-		cout << "Tis not an anagram" << endl;
-	}
+	Tree tree1;
+	tree1.insert(55);
+	tree1.insert(54);
+	tree1.insert(53);
 }
