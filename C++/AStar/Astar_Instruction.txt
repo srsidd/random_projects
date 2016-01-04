@@ -1,0 +1,11 @@
+To run the Astar Implementation, compile the file and run it.
+The executable file is also included (a.out)
+
+The user will be asked to input the start and goal points. (If the input is not an integer the user is prompted to type a number, and if the number is outside the graph, the program displays an error messages and exits.)
+
+The user is then asked to input the number of obstacles and the position of each obstacle. 
+
+The program then displays a grid with the graph, obstacles and path to be taken from the start to the goal.
+
+The size of the grid cannot be changed by the user during run time and has to be done in the code. This is set by the "gridSize" macro defined on Line 16.
+
