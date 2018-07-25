@@ -1,0 +1,7 @@
+atom-ros@1.2.0
+clang-format@1.30.0
+language-cmake@1.1.0
+language-ini@1.20.0
+minimap@4.29.7
+python-autopep8@0.1.3
+
