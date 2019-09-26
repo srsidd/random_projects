@@ -8,4 +8,4 @@
  # \$(__git_ps1 '(%s)') -> git aware prompt
  # \e[0;92m -> green color font for anything you type after this
  GIT_PS1_SHOWDIRTYSTATE=1
- PS1="\[\e[1;96m\]\W\[\e[92m\]@\h\[\e[1;91m\]\$(__git_ps1 '(%s)')\e[0;92m "
+  PS1="\[\e[1;96m\]\W\[\e[92m\]@\h\[\e[1;91m\]\$(__git_ps1 '(%s)')\[\e[0;92m\] "
