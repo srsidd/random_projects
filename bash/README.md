@@ -21,8 +21,6 @@ $ apm install --packages-file my-package-list.txt
 # Personal Aliases
 alias cbt="catkin build --this --no-deps"
 alias cb="catkin build"
-alias smt_brz_term="terminator -l smt_brz &!"
-alias vpnme="sudo openvpn --config /home/sidd/.hmi_client.ovpn"
-alias deepme="source /home/sidd/deepdive_ws/install/setup.bash"
 alias sourceme="bash /home/sidd/.sourceme.sh"
+alias cr="catkin run_tests"
 ```
