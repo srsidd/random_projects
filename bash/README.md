@@ -20,7 +20,9 @@ $ apm install --packages-file my-package-list.txt
 ```
 # Personal Aliases
 alias cbt="catkin build --this --no-deps"
+alias cbn="catkin build --no-deps"
 alias cb="catkin build"
-alias sourceme="bash /home/sidd/.sourceme.sh"
+alias cc="catkin clean -y"
 alias cr="catkin run_tests"
+alias sourceme="bash /home/sidd/.sourceme.sh"
 ```
