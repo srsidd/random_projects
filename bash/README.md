@@ -17,6 +17,11 @@ touch ~/.inputrc
 # Copy the lines from the inputrc file in the repo and paste it in ~/.inputrc
 vim ~/.inputrc
 ```
+## Increase bash history
+```bash
+ HISTSIZE=20000
+ HISTFILESIZE=40000
+ ```
 
 ## sourceme
 ### How to install 
