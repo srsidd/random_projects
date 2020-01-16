@@ -18,6 +18,7 @@ touch ~/.inputrc
 vim ~/.inputrc
 ```
 ## Increase bash history
+Edit your `~.bashrc` and either replace the lines, or add these at the end
 ```bash
  HISTSIZE=20000
  HISTFILESIZE=40000
