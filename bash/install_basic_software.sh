@@ -30,7 +30,10 @@ sudo apt-get install curl
 
 # Get dropbox
 cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-printf "\n\n\n\n Remember to run ~/.dropbox-dist/dropboxd separately to start dropbox\n\n\n\n"
+
+# Install dropbox
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+# ~/.dropbox-dist/dropboxd # Uncomment this for running dropbox and configuring with your account
 
 # Good PDF reader
 cd ~/Downloads

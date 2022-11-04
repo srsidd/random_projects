@@ -1,0 +1,311 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+##############################
+# Sidd's edits start here
+##############################
+
+# Increase bash history size
+HISTSIZE=20000
+HISTFILESIZE=40000
+# Ignore duplicates, ls without options and builtin commands
+HISTCONTROL=ignoredups
+export HISTIGNORE="&:ls:[bf]g:exit"
+
+# Terminal prompt 
+GIT_PS1_SHOWDIRTYSTATE=1
+PS1="\[\e[1;96m\]\W\[\e[92m\]@\h\[\e[1;91m\]\$(__git_ps1 '(%s)')\[\e[0;92m\] "
+# Rm the ugly default ls directory colors 
+export LS_COLORS="$LS_COLORS:ow=1;34;40:tw=1;34:"
+
+# For fuzzy finder
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Workspace sourcing
+source /opt/ros/melodic/setup.bash
+source /home/sidd/workspace/mril_ws/install/setup.bash
+
+# Add Coverity path
+export PATH=$PATH:/home/sidd/cov-analysis-linux64-2020.06/bin/
+
+# catkin Aliases
+alias cbt="catkin build --this --no-deps"
+alias cbn="catkin build --no-deps"
+alias cb="catkin build"
+alias cc="catkin clean -y"
+alias ccb="catkin clean -y && catkin build"
+alias cr="catkin run_tests"
+alias ck="catkin"
+
+# vcs tool completion
+if [ -f /usr/share/vcstool-completion/vcs.bash ]; then
+    source /usr/share/vcstool-completion/vcs.bash
+fi
+
+# Linux Aliases
+alias ebrc="edit ~/.bashrc"  # Edit this .bashrc file
+alias sbrc="source ~/.bashrc"  # Source this .bashrc file
+alias home="cd ~"            # go to home dir
+alias cd..="cd .."
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias p="ps aux | grep "     # Search running processes
+alias diff="colordiff"       # requires colordiff package
+
+alias update='sudo apt-get update'
+alias upgrade='sudo apt-get upgrade'
+alias psg='ps aux | rg -i'
+alias pport="sudo netstat -lpn | rg"
+alias k9='kill -9'
+
+alias rebootsafe='sudo shutdown -r now'
+alias rebootforce='sudo shutdown -r -n now'
+alias enter_matrix='echo -e "\e[32m"; while :; do for i in {1..16}; do r="$(($RANDOM % 2))"; if [[ $(($RANDOM % 5)) == 1 ]]; then if [[ $(($RANDOM % 4)) == 1 ]]; then v+="\e[1m $r   "; else v+="\e[2m $r   "; fi; else v+="     "; fi; done; echo -e "$v"; v=""; done'
+
+# ripgrep aliases
+if which rg >/dev/null 2>&1; then
+    alias rgh='rg --hidden'
+    alias rgi='rg --ignore-case'
+    alias rghi='rg --hidden --ignore-case'
+    alias rgl='rg -l --sort-files'
+else
+    printf "${red}ripgrep not found, please install\n"
+fi
+
+# This is GOLD for finding out what is taking so much space on your drives!
+alias diskspace="du -S | sort -n -r |more"
+
+# Enable/Disable touchpad
+alias etp='xinput --enable "SynPS/2 Synaptics TouchPad"'
+alias dtp='xinput --disable "SynPS/2 Synaptics TouchPad"'
+
+# Git related
+alias gs="git status"
+alias gc="git commit"
+alias ga="git add"
+alias gd="git diff"
+alias gb="git branch"
+alias gl="git log"
+alias gco="git checkout"
+
+# Prune local branches
+function gbc() {
+    cyn=$'\e[1;36m'
+    end=$'\e[0m'
+
+    printf "Pruning local, non- master/develop branches that have been merged into the current branch..\n"
+
+    for i in * ; do
+        if [ -d "$i" ]; then
+            reponame=$(basename "$i")
+            cd $reponame
+            if [ -d .git ]; then
+                output=$(git branch --merged | egrep -v "(^\*|master|dev)")
+                if [[ $output ]]; then
+                    printf "${cyn}$(pwd)${1#.}/%s${end}\n" $reponame
+                    git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+                    printf "\n"
+                fi
+            fi
+            cd ..
+        fi
+    done
+}
+
+# Extracts any archive(s) (if unp isn't installed)
+extract () {
+	for archive in $*; do
+		if [ -f $archive ] ; then
+			case $archive in
+				*.tar.bz2)   tar xvjf $archive    ;;
+				*.tar.gz)    tar xvzf $archive    ;;
+				*.bz2)       bunzip2 $archive     ;;
+				*.rar)       rar x $archive       ;;
+				*.gz)        gunzip $archive      ;;
+				*.tar)       tar xvf $archive     ;;
+				*.tbz2)      tar xvjf $archive    ;;
+				*.tgz)       tar xvzf $archive    ;;
+				*.zip)       unzip $archive       ;;
+				*.Z)         uncompress $archive  ;;
+				*.7z)        7z x $archive        ;;
+				*)           echo "don't know how to extract '$archive'..." ;;
+			esac
+		else
+			echo "'$archive' is not a valid file!"
+		fi
+	done
+}
+
+# REMIND ME, ITS IMPORTANT!
+# usage: remindme <time> <text>
+# e.g.: remindme 10m "omg, the pizza"
+remindme() {
+  if [[ "$#" -lt 2 ]]; then
+    echo -e "Usage: remindme [time] '[message]'"
+    echo -e "Example: remindme 50s 'check mail'"
+    echo -e "Example: remindme 10m 'go to class'"
+    #exit 0 #not enough args
+  fi
+  if [[ "$#" -gt 2 ]]; then
+    echo -e "Usage: remindme [time] '[message]'"
+    echo -e "Example: remindme 50s 'check mail'"
+    echo -e "Example: remindme 10m 'go to class'"
+    #exit 0 #more than enough args
+  fi
+  if  [[ "$#" == 2 ]]; then
+    sleep $1 && notify-send -t 15000 "$2" & echo 'Reminder set'
+  fi
+}
+
+# SWAP 2 FILENAMES AROUND, IF THEY EXIST {{{
+swap() {
+  local TMPFILE=tmp.$$
+
+  [[ $# -ne 2 ]] && echo "swap: 2 arguments needed" && return 1
+  [[ ! -e $1 ]] && echo "swap: $1 does not exist" && return 1
+  [[ ! -e $2 ]] && echo "swap: $2 does not exist" && return 1
+
+  mv "$1" $TMPFILE
+  mv "$2" "$1"
+  mv $TMPFILE "$2"
+}
+
+# MKDIR AND CD INTO NEW DIR{{{
+mkcd() {
+  if [ $# != 1 ]; then
+    echo "Usage: mkcd <dir>"
+  else
+    mkdir -p $1 && cd $1
+  fi
+}
+
+# Falcon alias
+alias sshr="sshpass -p MRoceaneering ssh mril@falcon"
+# alias sshr="ssh mril@falcon"
+alias pingr="ping falcon"
+
+# ROS exports
+export IGN_IP=127.0.0.1
+export ROS_MASTER_URI=http://localhost:11311
+# export ROS_MASTER_URI=http://falcon:11311
+# export ROS_IP=192.168.0.14
+export ROS_IP=192.168.0.13
+# export ROS_IP=172.19.253.154
+
