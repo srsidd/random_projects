@@ -1,5 +1,5 @@
 /*
-	Code to run life long planning A star
+	Code to run real time A star algorithm
 	Author : Siddharth Srivatsa
 	Date : 27th October, 2015
 */
