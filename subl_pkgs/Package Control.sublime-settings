@@ -1,0 +1,35 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"Alignment",
+		"All Autocomplete",
+		"AutoFileName",
+		"BracketHighlighter",
+		"CMake",
+		"CMakeEditor",
+		"ColorPicker",
+		"DocBlockr",
+		"Emmet",
+		"Emmet Css Snippets",
+		"Emoji",
+		"FileIcons",
+		"Git",
+		"GitGutter",
+		"Github Tools",
+		"Gutter Color",
+		"KeyboardSpellCheck",
+		"MarkdownPreview",
+		"Maybs Quit",
+		"Package Control",
+		"Package Syncing",
+		"PackageSync",
+		"Pylinter",
+		"SideBarEnhancements"
+	]
+}
+# DON'T GET ROS SNIPPETS!!
